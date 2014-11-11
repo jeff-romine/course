@@ -180,8 +180,12 @@ filter f (h:.t) =
   List a
   -> List a
   -> List a
-(++) =
-  error "todo"
+
+(++) x y = helper Nil x y
+  where
+    helper Nil Nil bs = bs
+    helper (r:.rs) Nil bs = helper rs Nil (r:.bs)
+    helper acc (a:.as) bs = helper (a:.acc) as bs
 
 infixr 5 ++
 
@@ -198,8 +202,9 @@ infixr 5 ++
 flatten ::
   List (List a)
   -> List a
+
 flatten =
-  error "todo"
+
 
 -- | Map a function then flatten to a list.
 --
